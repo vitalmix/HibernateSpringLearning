@@ -1,27 +1,35 @@
 package com.company;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import com.company.model.StarShip;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 public class Run {
     public static void main(String[] args) {
 
         //21 - 1
 
-        String jdbURL = "jdbc:mysql://localhost:3306/starships_shop?useSSL=false&serverTimezone=UTC";
-        String user = "stdeveloper";
-        String password = "stdeveloper";
+        SessionFactory factory = new Configuration()
+                .configure()
+                .addAnnotatedClass(StarShip.class)
+                .buildSessionFactory();
+
+        Session session = factory.getCurrentSession();
 
         try {
 
-            System.out.println("Connecting to database: " + jdbURL);
+            StarShip starShip =
+                    new StarShip("A441", "LaserGun", "15", 0, true);
 
-            Connection connection = DriverManager.getConnection(jdbURL,user,password);
+            session.beginTransaction();
 
-            System.out.println("Connection is successful!!!");
+            session.save(starShip);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            session.getTransaction().commit();
+
+        } finally {
+            factory.close();
         }
     }
 }

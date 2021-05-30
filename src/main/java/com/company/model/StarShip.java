@@ -44,6 +44,14 @@ public class StarShip {
                 '}';
     }
 
+    public StarShip(String model, String weapon, String modules, int numOfPassengers, boolean hyperDrive) {
+        this.model = model;
+        this.weapon = weapon;
+        this.modules = modules;
+        this.numOfPassengers = numOfPassengers;
+        this.hyperDrive = hyperDrive;
+    }
+
     public StarShip(int id, String model, String modules, int numOfPassengers, boolean hyperDrive) {
         this.id = id;
         this.model = model;
