@@ -30,7 +30,9 @@ public class Run {
 
             session.getTransaction().commit();*/
 
-            getShip(session,1);
+            //getShip(session,1);
+
+            getShipByModel(session, "A441");
 
         } finally {
             factory.close();
@@ -51,4 +53,18 @@ public class Run {
 
     }
 
+    public static void getShipByModel(Session session, String model) {
+
+        session.beginTransaction();
+
+        List<StarShip> starShips = session
+                .createQuery("from StarShip s where s.model = '"+ model +"'")
+                .list();
+
+        System.out.println("QUERY OBJECTS");
+        for (StarShip s: starShips
+        ) {
+            System.out.println(s.toString());
+        }
+    }
 }
