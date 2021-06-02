@@ -10,7 +10,7 @@ import java.util.List;
 public class Run {
     public static void main(String[] args) {
 
-        //21 - 4
+        //21 - 10
 
         SessionFactory factory = new Configuration()
                 .configure()
