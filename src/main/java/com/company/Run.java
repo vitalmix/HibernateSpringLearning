@@ -16,7 +16,7 @@ public class Run {
 
             //getShip(session,1);
 
-            addShip(SessionFactoryManager.getSession());
+            //addShip(SessionFactoryManager.getSession());
 
             getShipByModel(SessionFactoryManager.getSession(), "A441");
 
@@ -53,9 +53,13 @@ public class Run {
     public static void getShipByModel(Session session, String model) {
 
         session.beginTransaction();
-
+/*
         List<StarShip> starShips = session
                 .createQuery("from StarShip s where s.model = '"+ model +"'")
+                .list();*/
+
+        List<StarShip> starShips = session
+                .createQuery("from StarShip s where s.model = '"+ model +"' or s.model LIKE 'A4%'")
                 .list();
 
         System.out.println("QUERY OBJECTS");
