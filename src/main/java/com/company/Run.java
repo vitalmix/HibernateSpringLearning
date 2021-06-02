@@ -20,18 +20,11 @@ public class Run {
         Session session = factory.getCurrentSession();
 
         try {
-/*
-            StarShip starShip =
-                    new StarShip("A441", "LaserGun", "15", 0, true);
-
-            session.beginTransaction();
-
-            session.save(starShip);
-
-            session.getTransaction().commit();*/
 
             //getShip(session,1);
 
+            addShip(session);
+            session = factory.getCurrentSession();
             getShipByModel(session, "A441");
 
         } finally {
@@ -39,6 +32,17 @@ public class Run {
         }
     }
 
+    public static void addShip(Session session) {
+        StarShip starShip =
+                new StarShip("A442",
+                        "LaserGun", 25, 0, true);
+
+        session.beginTransaction();
+
+        session.save(starShip);
+
+        session.getTransaction().commit();
+    }
 
     public static void getShip(Session session, int id) {
 
