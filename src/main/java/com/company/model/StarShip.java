@@ -19,8 +19,8 @@ public class StarShip {
     @Column(name = "weapon")
     private String weapon;
 
-    @Column(name = "modules")
-    private String modules;
+    @Column(name = "num_of_modules")
+    private int numOfModules;
 
     @Column(name = "num_of_passengers")
     private int numOfPassengers;
@@ -38,33 +38,33 @@ public class StarShip {
                 "id=" + id +
                 ", model='" + model + '\'' +
                 ", weapon='" + weapon + '\'' +
-                ", modules='" + modules + '\'' +
+                ", modules='" + numOfModules + '\'' +
                 ", numOfPassengers=" + numOfPassengers +
                 ", hyperDrive=" + hyperDrive +
                 '}';
     }
 
-    public StarShip(String model, String weapon, String modules, int numOfPassengers, boolean hyperDrive) {
+    public StarShip(String model, String weapon, int numOfModules, int numOfPassengers, boolean hyperDrive) {
         this.model = model;
         this.weapon = weapon;
-        this.modules = modules;
+        this.numOfModules = numOfModules;
         this.numOfPassengers = numOfPassengers;
         this.hyperDrive = hyperDrive;
     }
 
-    public StarShip(int id, String model, String modules, int numOfPassengers, boolean hyperDrive) {
+    public StarShip(int id, String model, int numOfModules, int numOfPassengers, boolean hyperDrive) {
         this.id = id;
         this.model = model;
-        this.modules = modules;
+        this.numOfModules = numOfModules;
         this.numOfPassengers = numOfPassengers;
         this.hyperDrive = hyperDrive;
     }
 
-    public StarShip(int id, String model, String weapon, String modules, int numOfPassengers, boolean hyperDrive) {
+    public StarShip(int id, String model, String weapon, int numOfModules, int numOfPassengers, boolean hyperDrive) {
         this.id = id;
         this.model = model;
         this.weapon = weapon;
-        this.modules = modules;
+        this.numOfModules = numOfModules;
         this.numOfPassengers = numOfPassengers;
         this.hyperDrive = hyperDrive;
     }
@@ -85,12 +85,12 @@ public class StarShip {
         this.model = model;
     }
 
-    public String getModules() {
-        return modules;
+    public int getNumOfModules() {
+        return numOfModules;
     }
 
-    public void setModules(String modules) {
-        this.modules = modules;
+    public void setNumOfModules(int numOfModules) {
+        this.numOfModules = numOfModules;
     }
 
     public int getNumOfPassengers() {
