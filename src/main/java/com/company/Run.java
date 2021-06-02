@@ -1,9 +1,8 @@
 package com.company;
 
 import com.company.model.StarShip;
+import com.company.model.sql_connect.SessionFactoryManager;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 
@@ -11,31 +10,25 @@ public class Run {
     public static void main(String[] args) {
 
         //21 - 10
-
-        SessionFactory factory = new Configuration()
-                .configure()
-                .addAnnotatedClass(StarShip.class)
-                .buildSessionFactory();
-
-        Session session = factory.getCurrentSession();
+        SessionFactoryManager.createFactorySession();
 
         try {
 
             //getShip(session,1);
 
-            addShip(session);
-            session = factory.getCurrentSession();
-            getShipByModel(session, "A441");
+            addShip(SessionFactoryManager.getSession());
+
+            getShipByModel(SessionFactoryManager.getSession(), "A441");
 
         } finally {
-            factory.close();
+            SessionFactoryManager.closeFactory();
         }
     }
 
     public static void addShip(Session session) {
         StarShip starShip =
-                new StarShip("A442",
-                        "LaserGun", 25, 0, true);
+                new StarShip("A443",
+                        "LaserGun", 25, 5, true);
 
         session.beginTransaction();
 
