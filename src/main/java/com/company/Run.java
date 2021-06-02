@@ -4,7 +4,11 @@ import com.company.model.StarShip;
 import com.company.model.sql_connect.SessionFactoryManager;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Run {
     public static void main(String[] args) {
@@ -16,7 +20,7 @@ public class Run {
 
             //getShip(session,1);
 
-            //addShip(SessionFactoryManager.getSession());
+            addShip(SessionFactoryManager.getSession());
 
             getShipByModel(SessionFactoryManager.getSession(), "A441");
 
@@ -27,12 +31,19 @@ public class Run {
 
     public static void addShip(Session session) {
         StarShip starShip =
-                new StarShip("A443",
+                new StarShip("A441",
                         "LaserGun", 25, 5, true);
+
 
         session.beginTransaction();
 
-        session.save(starShip);
+        for (int i = 1; i < 11; i++) {
+            session.save(new StarShip("A44" + i ,
+                            "LaserGun", 25, 5, true));
+        }
+
+
+        //session.save(starShips);
 
         session.getTransaction().commit();
     }
@@ -53,19 +64,31 @@ public class Run {
     public static void getShipByModel(Session session, String model) {
 
         session.beginTransaction();
-/*
         List<StarShip> starShips = session
-                .createQuery("from StarShip s where s.model = '"+ model +"'")
+                .createQuery("from StarShip")
+                .list();
+
+        /*List<StarShip> starShips = session
+                .createQuery("from StarShip s where s.model = '"+ model +"' or s.model LIKE 'A4%'")
                 .list();*/
 
-        List<StarShip> starShips = session
-                .createQuery("from StarShip s where s.model = '"+ model +"' or s.model LIKE 'A4%'")
-                .list();
+        //starShips = updateStarShipModel(starShips,"qwe");
+
+        session.getTransaction().commit();
 
         System.out.println("QUERY OBJECTS");
         for (StarShip s: starShips
         ) {
             System.out.println(s.toString());
         }
+    }
+
+    public static List<StarShip> updateStarShipModel(List<StarShip> starShips, String model){
+        for (StarShip sh :
+                starShips) {
+            sh.setModel(model);
+        }
+
+        return starShips;
     }
 }
