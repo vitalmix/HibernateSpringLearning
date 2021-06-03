@@ -1,44 +1,53 @@
 package com.company;
 
 import com.company.model.StarShip;
+import com.company.model.sql_connect.SessionFactoryManager;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Run {
     public static void main(String[] args) {
 
-        //21 - 11
 
-        SessionFactory factory = new Configuration()
-                .configure()
-                .addAnnotatedClass(StarShip.class)
-                .buildSessionFactory();
-
-        Session session = factory.getCurrentSession();
+        //21 - 10
+        SessionFactoryManager.createFactorySession();
 
         try {
-/*
-            StarShip starShip =
-                    new StarShip("A441", "LaserGun", "15", 0, true);
-
-            session.beginTransaction();
-
-            session.save(starShip);
-
-            session.getTransaction().commit();*/
 
             //getShip(session,1);
 
-            getShipByModel(session, "A441");
+            addShip(SessionFactoryManager.getSession());
+
+            getShipByModel(SessionFactoryManager.getSession(), "A441");
 
         } finally {
-            factory.close();
+            SessionFactoryManager.closeFactory();
         }
     }
 
+    public static void addShip(Session session) {
+        StarShip starShip =
+                new StarShip("A441",
+                        "LaserGun", 25, 5, true);
+
+
+        session.beginTransaction();
+
+        for (int i = 1; i < 11; i++) {
+            session.save(new StarShip("A44" + i ,
+                            "LaserGun", 25, 5, true));
+        }
+
+
+        //session.save(starShips);
+
+        session.getTransaction().commit();
+    }
 
     public static void getShip(Session session, int id) {
 
@@ -56,15 +65,31 @@ public class Run {
     public static void getShipByModel(Session session, String model) {
 
         session.beginTransaction();
-
         List<StarShip> starShips = session
-                .createQuery("from StarShip s where s.model = '"+ model +"'")
+                .createQuery("from StarShip")
                 .list();
+
+        /*List<StarShip> starShips = session
+                .createQuery("from StarShip s where s.model = '"+ model +"' or s.model LIKE 'A4%'")
+                .list();*/
+
+        //starShips = updateStarShipModel(starShips,"qwe");
+
+        session.getTransaction().commit();
 
         System.out.println("QUERY OBJECTS");
         for (StarShip s: starShips
         ) {
             System.out.println(s.toString());
         }
+    }
+
+    public static List<StarShip> updateStarShipModel(List<StarShip> starShips, String model){
+        for (StarShip sh :
+                starShips) {
+            sh.setModel(model);
+        }
+
+        return starShips;
     }
 }
