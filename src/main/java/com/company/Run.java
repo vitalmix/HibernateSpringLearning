@@ -4,11 +4,7 @@ import com.company.model.StarShip;
 import com.company.model.sql_connect.SessionFactoryManager;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Run {
     public static void main(String[] args) {
@@ -21,9 +17,11 @@ public class Run {
 
             //getShip(session,1);
 
-            addShip(SessionFactoryManager.getSession());
+            //addShip(SessionFactoryManager.getSession());
 
-            getShipByModel(SessionFactoryManager.getSession(), "A441");
+            updateStarShipWeapon(SessionFactoryManager.getSession(),3,"MEGALASERGUN");
+
+            //getShipByModel(SessionFactoryManager.getSession(), "A441");
 
         } finally {
             SessionFactoryManager.closeFactory();
@@ -82,6 +80,16 @@ public class Run {
         ) {
             System.out.println(s.toString());
         }
+    }
+
+    public static void updateStarShipWeapon(Session session, int id, String weapon) {
+
+        session.beginTransaction();
+
+        session.createQuery("update StarShip s set s.weapon = '"+weapon+"' where s.id = "+id+"").executeUpdate();
+
+        session.getTransaction().commit();
+
     }
 
     public static List<StarShip> updateStarShipModel(List<StarShip> starShips, String model){
