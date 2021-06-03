@@ -19,7 +19,11 @@ public class Run {
 
             //addShip(SessionFactoryManager.getSession());
 
-            updateStarShipWeapon(SessionFactoryManager.getSession(),3,"MEGALASERGUN");
+            //updateStarShipWeapon(SessionFactoryManager.getSession(),3,"MEGALASERGUN");
+
+            //deleteStarShipById(SessionFactoryManager.getSession(), 4);
+
+            deleteStarShipByModel(SessionFactoryManager.getSession(), "A443");
 
             //getShipByModel(SessionFactoryManager.getSession(), "A441");
 
@@ -91,6 +95,18 @@ public class Run {
         session.getTransaction().commit();
 
     }
+
+    public static void deleteStarShipById(Session session, int id) {
+
+        session.beginTransaction();
+
+        session.createQuery("delete StarShip s where s.id = "+id+"").executeUpdate();
+
+        session.getTransaction().commit();
+    }
+
+
+    
 
     public static List<StarShip> updateStarShipModel(List<StarShip> starShips, String model){
         for (StarShip sh :
