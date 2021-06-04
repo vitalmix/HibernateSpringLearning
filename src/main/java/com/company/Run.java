@@ -4,11 +4,7 @@ import com.company.model.StarShip;
 import com.company.model.sql_connect.SessionFactoryManager;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Run {
     public static void main(String[] args) {
