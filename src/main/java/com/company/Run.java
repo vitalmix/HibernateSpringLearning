@@ -10,7 +10,7 @@ public class Run {
     public static void main(String[] args) {
 
 
-        //21 - 10
+        //21 - 15
         SessionFactoryManager.createFactorySession();
 
         try {
@@ -106,7 +106,14 @@ public class Run {
     }
 
 
-    
+    public static void deleteStarShipByModel(Session session, String model) {
+
+        session.beginTransaction();
+
+        session.createQuery("delete StarShip s where s.model = '"+model+"'").list().get(0);
+
+        session.getTransaction().commit();
+    }
 
     public static List<StarShip> updateStarShipModel(List<StarShip> starShips, String model){
         for (StarShip sh :
