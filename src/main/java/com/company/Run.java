@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.model.StarShip;
+import com.company.model.Starship;
 import com.company.model.sql_connect.SessionFactoryManager;
 import org.hibernate.Session;
 
@@ -10,7 +10,7 @@ public class Run {
     public static void main(String[] args) {
 
 
-        //21 - 15
+        //23 - 2
         SessionFactoryManager.createFactorySession();
 
         try {
@@ -21,9 +21,9 @@ public class Run {
 
             //updateStarShipWeapon(SessionFactoryManager.getSession(),3,"MEGALASERGUN");
 
-            //deleteStarShipById(SessionFactoryManager.getSession(), 4);
+            deleteStarShipById(SessionFactoryManager.getSession(), 15);
 
-            deleteStarShipByModel(SessionFactoryManager.getSession(), "A443");
+            //deleteStarShipByModel(SessionFactoryManager.getSession(), "A443");
 
             //getShipByModel(SessionFactoryManager.getSession(), "A441");
 
@@ -33,15 +33,15 @@ public class Run {
     }
 
     public static void addShip(Session session) {
-        StarShip starShip =
-                new StarShip("A441",
+        Starship starShip =
+                new Starship("A441",
                         "LaserGun", 25, 5, true);
 
 
         session.beginTransaction();
 
         for (int i = 1; i < 11; i++) {
-            session.save(new StarShip("A44" + i ,
+            session.save(new Starship("A44" + i ,
                             "LaserGun", 25, 5, true));
         }
 
@@ -55,7 +55,7 @@ public class Run {
 
         session.beginTransaction();
 
-        StarShip starShip = session.get(StarShip.class, id);
+        Starship starShip = session.get(Starship.class, id);
 
         session.getTransaction().commit();
 
@@ -67,8 +67,8 @@ public class Run {
     public static void getShipByModel(Session session, String model) {
 
         session.beginTransaction();
-        List<StarShip> starShips = session
-                .createQuery("from StarShip")
+        List<Starship> starships = session
+                .createQuery("from Starship")
                 .list();
 
         /*List<StarShip> starShips = session
@@ -80,7 +80,7 @@ public class Run {
         session.getTransaction().commit();
 
         System.out.println("QUERY OBJECTS");
-        for (StarShip s: starShips
+        for (Starship s: starships
         ) {
             System.out.println(s.toString());
         }
@@ -90,7 +90,7 @@ public class Run {
 
         session.beginTransaction();
 
-        session.createQuery("update StarShip s set s.weapon = '"+weapon+"' where s.id = "+id+"").executeUpdate();
+        session.createQuery("update Starship s set s.weapon = '"+weapon+"' where s.id = "+id+"").executeUpdate();
 
         session.getTransaction().commit();
 
@@ -100,7 +100,7 @@ public class Run {
 
         session.beginTransaction();
 
-        session.createQuery("delete StarShip s where s.id = "+id+"").executeUpdate();
+        session.delete(session.get(Starship.class, id));
 
         session.getTransaction().commit();
     }
@@ -110,17 +110,17 @@ public class Run {
 
         session.beginTransaction();
 
-        session.createQuery("delete StarShip s where s.model = '"+model+"'").list().get(0);
+        session.createQuery("delete Starship s where s.model = '"+model+"'").list().get(0);
 
         session.getTransaction().commit();
     }
 
-    public static List<StarShip> updateStarShipModel(List<StarShip> starShips, String model){
-        for (StarShip sh :
-                starShips) {
+    public static List<Starship> updateStarShipModel(List<Starship> starships, String model){
+        for (Starship sh :
+                starships) {
             sh.setModel(model);
         }
 
-        return starShips;
+        return starships;
     }
 }

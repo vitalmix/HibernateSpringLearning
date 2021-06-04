@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "starship")
-public class StarShip {
+public class Starship {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class StarShip {
     @Column(name = "hyperdrive")
     private boolean hyperDrive;
 
-    public StarShip() {
+    public Starship() {
 
     }
 
@@ -42,7 +42,7 @@ public class StarShip {
                 '}';
     }
 
-    public StarShip(String model, String weapon, int numOfModules, int numOfPassengers, boolean hyperDrive) {
+    public Starship(String model, String weapon, int numOfModules, int numOfPassengers, boolean hyperDrive) {
         this.model = model;
         this.weapon = weapon;
         this.numOfModules = numOfModules;
@@ -50,7 +50,7 @@ public class StarShip {
         this.hyperDrive = hyperDrive;
     }
 
-    public StarShip(int id, String model, int numOfModules, int numOfPassengers, boolean hyperDrive) {
+    public Starship(int id, String model, int numOfModules, int numOfPassengers, boolean hyperDrive) {
         this.id = id;
         this.model = model;
         this.numOfModules = numOfModules;
@@ -58,7 +58,7 @@ public class StarShip {
         this.hyperDrive = hyperDrive;
     }
 
-    public StarShip(int id, String model, String weapon, int numOfModules, int numOfPassengers, boolean hyperDrive) {
+    public Starship(int id, String model, String weapon, int numOfModules, int numOfPassengers, boolean hyperDrive) {
         this.id = id;
         this.model = model;
         this.weapon = weapon;

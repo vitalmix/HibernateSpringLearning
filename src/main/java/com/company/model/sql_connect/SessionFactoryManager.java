@@ -1,6 +1,6 @@
 package com.company.model.sql_connect;
 
-import com.company.model.StarShip;
+import com.company.model.Starship;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -12,7 +12,7 @@ public class SessionFactoryManager {
     public static void createFactorySession() {
         factory = new Configuration()
                 .configure()
-                .addAnnotatedClass(StarShip.class)
+                .addAnnotatedClass(Starship.class)
                 .buildSessionFactory();
     }
 
