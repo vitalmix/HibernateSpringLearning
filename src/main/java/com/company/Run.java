@@ -9,16 +9,23 @@ import java.util.List;
 public class Run {
     public static void main(String[] args) {
 
-        //21 - 10
+
+        //21 - 15
         SessionFactoryManager.createFactorySession();
 
         try {
 
             //getShip(session,1);
 
-            addShip(SessionFactoryManager.getSession());
+            //addShip(SessionFactoryManager.getSession());
 
-            getShipByModel(SessionFactoryManager.getSession(), "A441");
+            //updateStarShipWeapon(SessionFactoryManager.getSession(),3,"MEGALASERGUN");
+
+            //deleteStarShipById(SessionFactoryManager.getSession(), 4);
+
+            deleteStarShipByModel(SessionFactoryManager.getSession(), "A443");
+
+            //getShipByModel(SessionFactoryManager.getSession(), "A441");
 
         } finally {
             SessionFactoryManager.closeFactory();
@@ -77,6 +84,35 @@ public class Run {
         ) {
             System.out.println(s.toString());
         }
+    }
+
+    public static void updateStarShipWeapon(Session session, int id, String weapon) {
+
+        session.beginTransaction();
+
+        session.createQuery("update StarShip s set s.weapon = '"+weapon+"' where s.id = "+id+"").executeUpdate();
+
+        session.getTransaction().commit();
+
+    }
+
+    public static void deleteStarShipById(Session session, int id) {
+
+        session.beginTransaction();
+
+        session.createQuery("delete StarShip s where s.id = "+id+"").executeUpdate();
+
+        session.getTransaction().commit();
+    }
+
+
+    public static void deleteStarShipByModel(Session session, String model) {
+
+        session.beginTransaction();
+
+        session.createQuery("delete StarShip s where s.model = '"+model+"'").list().get(0);
+
+        session.getTransaction().commit();
     }
 
     public static List<StarShip> updateStarShipModel(List<StarShip> starShips, String model){
