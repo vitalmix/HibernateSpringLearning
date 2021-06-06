@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.model.Starship;
+import com.company.model.StarshipProfile;
 import com.company.model.sql_connect.SessionFactoryManager;
 import org.hibernate.Session;
 
@@ -15,13 +16,16 @@ public class Run {
 
         try {
 
+
+            createShip(SessionFactoryManager.getSession());
+
             //getShip(session,1);
 
             //addShip(SessionFactoryManager.getSession());
 
             //updateStarShipWeapon(SessionFactoryManager.getSession(),3,"MEGALASERGUN");
 
-            deleteStarShipById(SessionFactoryManager.getSession(), 15);
+            //deleteStarShipById(SessionFactoryManager.getSession(), 15);
 
             //deleteStarShipByModel(SessionFactoryManager.getSession(), "A443");
 
@@ -49,6 +53,22 @@ public class Run {
         //session.save(starShips);
 
         session.getTransaction().commit();
+    }
+
+    public static void createShip(Session session) {
+
+        Starship starship = new Starship("A441", "LaserGun", 15, 0, true);
+
+        StarshipProfile starshipProfile = new StarshipProfile(0,"A441DQS");
+
+        starship.setStarshipProfile(starshipProfile);
+
+        session.beginTransaction();
+
+        session.save(starship);
+
+        session.getTransaction().commit();
+
     }
 
     public static void getShip(Session session, int id) {
@@ -104,7 +124,6 @@ public class Run {
 
         session.getTransaction().commit();
     }
-
 
     public static void deleteStarShipByModel(Session session, String model) {
 
