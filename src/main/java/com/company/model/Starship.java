@@ -27,8 +27,10 @@ public class Starship {
     private boolean hyperDrive;
 
     @OneToOne
-    @JoinColumn(name = "starship_galaxy_profile_id")
-    private StarshipGalaxyProfile starshipGalaxyProfile;
+    @JoinColumn(name = "starship_profile_id")
+    private StarshipProfile starshipProfile;
+
+
 
     public Starship() {
 

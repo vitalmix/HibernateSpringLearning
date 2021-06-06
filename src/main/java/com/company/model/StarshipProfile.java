@@ -1,9 +1,20 @@
 package com.company.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "starship_profile")
 public class StarshipProfile {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "count_of_visited_galaxies")
     private int countOfVisitedGalaxies;
+
+    @Column(name = "licence_post_code")
     private String licencePostCode;
 
     public StarshipProfile() {
