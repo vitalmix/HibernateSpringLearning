@@ -31,6 +31,15 @@ public class StarshipProfile {
         this.licencePostCode = licencePostCode;
     }
 
+    @Override
+    public String toString() {
+        return "StarshipProfile{" +
+                "id=" + id +
+                ", countOfVisitedGalaxies=" + countOfVisitedGalaxies +
+                ", licencePostCode='" + licencePostCode + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

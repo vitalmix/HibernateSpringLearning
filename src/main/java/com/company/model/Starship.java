@@ -26,11 +26,9 @@ public class Starship {
     @Column(name = "hyperdrive")
     private boolean hyperDrive;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "starship_profile_id")
     private StarshipProfile starshipProfile;
-
-
 
     public Starship() {
 
@@ -119,5 +117,13 @@ public class Starship {
 
     public void setWeapon(String weapon) {
         this.weapon = weapon;
+    }
+
+    public StarshipProfile getStarshipProfile() {
+        return starshipProfile;
+    }
+
+    public void setStarshipProfile(StarshipProfile starshipProfile) {
+        this.starshipProfile = starshipProfile;
     }
 }
