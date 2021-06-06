@@ -26,20 +26,12 @@ public class Starship {
     @Column(name = "hyperdrive")
     private boolean hyperDrive;
 
+    @OneToOne
+    @JoinColumn(name = "starship_galaxy_profile_id")
+    private StarshipGalaxyProfile starshipGalaxyProfile;
+
     public Starship() {
 
-    }
-
-    @Override
-    public String toString() {
-        return "StarShip{" +
-                "id=" + id +
-                ", model='" + model + '\'' +
-                ", weapon='" + weapon + '\'' +
-                ", modules='" + numOfModules + '\'' +
-                ", numOfPassengers=" + numOfPassengers +
-                ", hyperDrive=" + hyperDrive +
-                '}';
     }
 
     public Starship(String model, String weapon, int numOfModules, int numOfPassengers, boolean hyperDrive) {
@@ -65,6 +57,18 @@ public class Starship {
         this.numOfModules = numOfModules;
         this.numOfPassengers = numOfPassengers;
         this.hyperDrive = hyperDrive;
+    }
+
+    @Override
+    public String toString() {
+        return "StarShip{" +
+                "id=" + id +
+                ", model='" + model + '\'' +
+                ", weapon='" + weapon + '\'' +
+                ", modules='" + numOfModules + '\'' +
+                ", numOfPassengers=" + numOfPassengers +
+                ", hyperDrive=" + hyperDrive +
+                '}';
     }
 
     public int getId() {

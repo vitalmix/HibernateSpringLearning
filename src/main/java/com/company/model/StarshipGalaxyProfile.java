@@ -17,4 +17,42 @@ public class StarshipGalaxyProfile {
     @Column(name = "count_of_destroyed_enemies")
     private int countOfDestroyedEnemies;
 
+
+    public StarshipGalaxyProfile() {
+    }
+
+    public StarshipGalaxyProfile(String nameOfTheGalaxy, int countOfDestroyedEnemies) {
+        this.nameOfTheGalaxy = nameOfTheGalaxy;
+        this.countOfDestroyedEnemies = countOfDestroyedEnemies;
+    }
+
+    public StarshipGalaxyProfile(int id, String nameOfTheGalaxy, int countOfDestroyedEnemies) {
+        this.id = id;
+        this.nameOfTheGalaxy = nameOfTheGalaxy;
+        this.countOfDestroyedEnemies = countOfDestroyedEnemies;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNameOfTheGalaxy() {
+        return nameOfTheGalaxy;
+    }
+
+    public void setNameOfTheGalaxy(String nameOfTheGalaxy) {
+        this.nameOfTheGalaxy = nameOfTheGalaxy;
+    }
+
+    public int getCountOfDestroyedEnemies() {
+        return countOfDestroyedEnemies;
+    }
+
+    public void setCountOfDestroyedEnemies(int countOfDestroyedEnemies) {
+        this.countOfDestroyedEnemies = countOfDestroyedEnemies;
+    }
 }
