@@ -38,6 +38,7 @@ public class Run {
             //getShipByModel(SessionFactoryManager.getSession(), "A441");
 
         } finally {
+            SessionFactoryManager.getSession().close();
             SessionFactoryManager.closeFactory();
         }
     }
