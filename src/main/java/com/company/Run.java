@@ -16,11 +16,13 @@ public class Run {
 
         try {
 
+            deleteProfileWithoutShip(SessionFactoryManager.getSession(), 3);
+
             //createShip(SessionFactoryManager.getSession());
 
-            getStarshipFromProfile(SessionFactoryManager.getSession(), 3);
+            //getStarshipFromProfile(SessionFactoryManager.getSession(), 3);
 
-            deleteProfileWithStarship(SessionFactoryManager.getSession(), 1);
+            //deleteProfileWithStarship(SessionFactoryManager.getSession(), 1);
 
             //createStarshipProfileWithStarShip(SessionFactoryManager.getSession());
 
@@ -197,6 +199,19 @@ public class Run {
         session.beginTransaction();
 
         StarshipProfile starshipProfile = session.get(StarshipProfile.class, id);
+
+        session.delete(starshipProfile);
+
+        session.getTransaction().commit();
+    }
+
+    public static void deleteProfileWithoutShip(Session session, int id) {
+
+        session.beginTransaction();
+
+        StarshipProfile starshipProfile = session.get(StarshipProfile.class, id);
+
+        starshipProfile.getStarship().setStarshipProfile(null);
 
         session.delete(starshipProfile);
 

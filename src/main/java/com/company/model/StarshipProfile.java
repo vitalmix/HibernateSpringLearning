@@ -17,7 +17,7 @@ public class StarshipProfile {
     @Column(name = "licence_post_code")
     private String licencePostCode;
 
-    @OneToOne(mappedBy = "starshipProfile", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "starshipProfile"/*, cascade = CascadeType.ALL*/)
     private Starship starship;
 
     public StarshipProfile() {
