@@ -16,8 +16,11 @@ public class Run {
 
         try {
 
+            //createShip(SessionFactoryManager.getSession());
 
-            createStarshipProfileWithStarShip(SessionFactoryManager.getSession());
+            getStarshipFromProfile(SessionFactoryManager.getSession(), 3);
+
+            //createStarshipProfileWithStarShip(SessionFactoryManager.getSession());
 
             //deleteStarshipWithProfile(SessionFactoryManager.getSession(), 1);
             //createShip(SessionFactoryManager.getSession());
@@ -60,9 +63,9 @@ public class Run {
 
     public static void createShip(Session session) {
 
-        Starship starship = new Starship("A441", "LaserGun", 15, 0, true);
+        Starship starship = new Starship("A443", "LaserGun", 15, 0, true);
 
-        StarshipProfile starshipProfile = new StarshipProfile(0,"A441DQS");
+        StarshipProfile starshipProfile = new StarshipProfile(15,"A441DQS");
 
         starship.setStarshipProfile(starshipProfile);
 
@@ -165,13 +168,22 @@ public class Run {
 
         StarshipProfile starshipProfile = new StarshipProfile(5,"VSQ1151");
 
-        starshipProfile.setStarship(new Starship("A442","LaserGun", 15, 3,true, starshipProfile.getId()));
-
+        starshipProfile.setStarship(new Starship("A442","LaserGun", 15, 3,true));
 
         session.beginTransaction();
 
         session.save(starshipProfile);
 
         session.getTransaction().commit();
+    }
+
+    private static void getStarshipFromProfile(Session session, int id) {
+        session.beginTransaction();
+
+        StarshipProfile starshipProfile = session.get(StarshipProfile.class, id);
+
+        System.out.println("Starship profile is ready: " + starshipProfile);
+
+        System.out.println("Starship is ready: " + starshipProfile.getStarship());
     }
 }
