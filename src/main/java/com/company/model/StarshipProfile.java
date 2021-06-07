@@ -17,6 +17,10 @@ public class StarshipProfile {
     @Column(name = "licence_post_code")
     private String licencePostCode;
 
+    @OneToOne(mappedBy = "starshipProfile", cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private Starship starship;
+
     public StarshipProfile() {
     }
 
@@ -62,5 +66,13 @@ public class StarshipProfile {
 
     public void setLicencePostCode(String licencePostCode) {
         this.licencePostCode = licencePostCode;
+    }
+
+    public Starship getStarship() {
+        return starship;
+    }
+
+    public void setStarship(Starship starship) {
+        this.starship = starship;
     }
 }

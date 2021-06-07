@@ -30,6 +30,9 @@ public class Starship {
     @JoinColumn(name = "starship_profile_id")
     private StarshipProfile starshipProfile;
 
+    @Column(name = "starship_profile_id")
+    private int starshipProfileId;
+
     public Starship() {
 
     }
@@ -40,6 +43,15 @@ public class Starship {
         this.numOfModules = numOfModules;
         this.numOfPassengers = numOfPassengers;
         this.hyperDrive = hyperDrive;
+    }
+
+    public Starship(String model, String weapon, int numOfModules, int numOfPassengers, boolean hyperDrive, int starshipProfileId) {
+        this.model = model;
+        this.weapon = weapon;
+        this.numOfModules = numOfModules;
+        this.numOfPassengers = numOfPassengers;
+        this.hyperDrive = hyperDrive;
+        this.starshipProfileId = starshipProfileId;
     }
 
     public Starship(int id, String model, int numOfModules, int numOfPassengers, boolean hyperDrive) {
@@ -125,5 +137,13 @@ public class Starship {
 
     public void setStarshipProfile(StarshipProfile starshipProfile) {
         this.starshipProfile = starshipProfile;
+    }
+
+    public int getStarshipProfileId() {
+        return starshipProfileId;
+    }
+
+    public void setStarshipProfileId(int starshipProfileId) {
+        this.starshipProfileId = starshipProfileId;
     }
 }

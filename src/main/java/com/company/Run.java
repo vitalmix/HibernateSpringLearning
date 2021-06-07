@@ -17,7 +17,9 @@ public class Run {
         try {
 
 
-            deleteStarshipWithProfile(SessionFactoryManager.getSession(), 1);
+            createStarshipProfileWithStarShip(SessionFactoryManager.getSession());
+
+            //deleteStarshipWithProfile(SessionFactoryManager.getSession(), 1);
             //createShip(SessionFactoryManager.getSession());
 
             //getShip(session,1);
@@ -159,4 +161,17 @@ public class Run {
         session.getTransaction().commit();
     }
 
+    public static void createStarshipProfileWithStarShip(Session session) {
+
+        StarshipProfile starshipProfile = new StarshipProfile(5,"VSQ1151");
+
+        starshipProfile.setStarship(new Starship("A442","LaserGun", 15, 3,true, starshipProfile.getId()));
+
+
+        session.beginTransaction();
+
+        session.save(starshipProfile);
+
+        session.getTransaction().commit();
+    }
 }
