@@ -17,7 +17,8 @@ public class Run {
         try {
 
 
-            createShip(SessionFactoryManager.getSession());
+            deleteStarshipWithProfile(SessionFactoryManager.getSession(), 1);
+            //createShip(SessionFactoryManager.getSession());
 
             //getShip(session,1);
 
@@ -142,4 +143,20 @@ public class Run {
 
         return starships;
     }
+
+    public static void deleteStarshipWithProfile(Session session, int id) {
+
+        session.beginTransaction();
+
+        Starship starship = session.get(Starship.class, id);
+
+        if (starship != null) {
+
+            System.out.println("Starship: " + starship + " is deleted");
+            session.delete(starship);
+        }
+
+        session.getTransaction().commit();
+    }
+
 }
