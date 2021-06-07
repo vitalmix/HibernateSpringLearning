@@ -11,7 +11,7 @@ public class Run {
     public static void main(String[] args) {
 
 
-        //23 - 9
+        //24 - 1
         SessionFactoryManager.createFactorySession();
 
         try {
