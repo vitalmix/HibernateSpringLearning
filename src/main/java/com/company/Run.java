@@ -20,6 +20,8 @@ public class Run {
 
             getStarshipFromProfile(SessionFactoryManager.getSession(), 3);
 
+            deleteProfileWithStarship(SessionFactoryManager.getSession(), 1);
+
             //createStarshipProfileWithStarShip(SessionFactoryManager.getSession());
 
             //deleteStarshipWithProfile(SessionFactoryManager.getSession(), 1);
@@ -186,5 +188,18 @@ public class Run {
         System.out.println("Starship profile is ready: " + starshipProfile);
 
         System.out.println("Starship is ready: " + starshipProfile.getStarship());
+
+        session.getTransaction().commit();
+    }
+
+    public static void deleteProfileWithStarship(Session session, int id){
+
+        session.beginTransaction();
+
+        StarshipProfile starshipProfile = session.get(StarshipProfile.class, id);
+
+        session.delete(starshipProfile);
+
+        session.getTransaction().commit();
     }
 }
